@@ -9,13 +9,6 @@ using CoinGecko.Interfaces;
 
 using System.Threading;
 
-/*
-namespace CriptoBot {
-    
-};
-*/
-
-
 
 // Get telegram api key from .key file
 string path = @".\telegram.key";
