@@ -1,4 +1,4 @@
-﻿using Telegram.Bot;
+using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
@@ -8,6 +8,13 @@ using CoinGecko.Clients;
 using CoinGecko.Interfaces;
 
 using System.Threading;
+
+/*
+namespace CriptoBot {
+    
+};
+*/
+
 
 
 // Get telegram api key from .key file
