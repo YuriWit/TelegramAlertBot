@@ -1,5 +1,5 @@
 from flask import Flask, request
-import telebot, json
+import telebot, json, time
 
 bot = telebot.TeleBot("5382490304:AAHAVgrcmrKFoSx2pNrjVpsAYF8aeQlz-Bc")
 app = Flask(__name__)
@@ -14,7 +14,9 @@ def alert(chatid):
         data = request.get_json()
         json_data = json.loads(data)
         alert = json_data["alert"]
-        bot.send_message(chatid, alert)
+        for i in range(10):
+            bot.send_message(chatid, alert)
+            time.sleep(1)
         return "ok"
     except Exception as e:
         return e
