@@ -24,6 +24,7 @@ def alert(chatid):
         bot.send_message(chatid, alert + "\n/seen")
         return "ok"
     except Exception as e:
+        print(e)
         return str(e)
 
 @app.route('/seen/<chatid>', methods=['GET','POST'])
@@ -40,6 +41,7 @@ def chech(chatid):
         else:
             raise Exception('Method not suported')
     except Exception as e:
+        print(e)
         return str(e)
 
 app.run(port=80)
