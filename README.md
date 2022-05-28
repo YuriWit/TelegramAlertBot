@@ -1,9 +1,7 @@
 # Telegram Alert Bot
-simple alert bot for crypto prices
+simple alert bot for forwording alerts to mobile devices
 
 ## Todo
 - [x] get simple project working
-- [ ] allow multiple chats
-- [ ] allow user to see there alerts enables
-- [ ] allow user to add alerts
-- [ ] allow user to delete alerts
+- [x] allow multiple chats
+- [ ] allow user to disable alerts
