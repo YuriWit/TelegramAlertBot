@@ -1,5 +1,5 @@
 from flask import Flask, request
-import telebot, json, time
+import telebot, json
 
 bot = telebot.TeleBot("5382490304:AAHAVgrcmrKFoSx2pNrjVpsAYF8aeQlz-Bc")
 app = Flask(__name__)
