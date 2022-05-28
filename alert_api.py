@@ -42,4 +42,4 @@ def chech(chatid):
     except Exception as e:
         return str(e)
 
-app.run()
+app.run(port=80)
