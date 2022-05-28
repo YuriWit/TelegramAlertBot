@@ -19,10 +19,12 @@ def alert(chatid):
             alert = json_data["alert"]
         elif request.method == 'GET':
             alert = request.args.get('alert')
+        else:
+            raise Exception('Method not suported')
         bot.send_message(chatid, alert + "\n/seen")
         return "ok"
     except Exception as e:
-        return e
+        return str(e)
 
 @app.route('/seen/<chatid>', methods=['GET','POST'])
 def chech(chatid):
