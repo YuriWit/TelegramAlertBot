@@ -8,15 +8,16 @@ app = Flask(__name__)
 def index():
     return 'Server on'
 
-@app.route('/alert/<chatid>', methods=['POST'])
+@app.route('/alert/<chatid>', methods=['GET','POST'])
 def alert(chatid):
     try:
-        data = request.get_json()
-        json_data = json.loads(data)
-        alert = json_data["alert"]
-        for i in range(10):
-            bot.send_message(chatid, alert)
-            time.sleep(1)
+        if request.method == 'POST':
+            data = request.get_json()
+            json_data = json.loads(data)
+            alert = json_data["alert"]
+        elif request.method == 'GET':
+            alert = request.args.get('alert')
+        bot.send_message(chatid, alert)
         return "ok"
     except Exception as e:
         return e
