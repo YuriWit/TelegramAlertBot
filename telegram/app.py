@@ -2,7 +2,7 @@ import telebot
 import requests, json
 
 bot = telebot.TeleBot("5382490304:AAHAVgrcmrKFoSx2pNrjVpsAYF8aeQlz-Bc")
-url = "http://127.0.0.1/seen/"
+url = "http://52.70.34.69/seen/"
 data = json.dumps({"seen": True})
 
 @bot.message_handler(commands=['getid'])
