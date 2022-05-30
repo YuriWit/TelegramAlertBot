@@ -19,4 +19,7 @@ def send_welcome(message):
 /getid - to get your chat id
 /seen - confirm recived""")
 
-bot.infinity_polling()
+
+if __name__ == "__main__":
+   bot.infinity_polling()
+

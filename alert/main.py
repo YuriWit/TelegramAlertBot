@@ -44,4 +44,7 @@ def chech(chatid):
         print(e)
         return str(e)
 
-app.run(port=80)
+
+if __name__ == "__main__":
+   app.run(host='0.0.0.0', port=5000)
+   
