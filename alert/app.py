@@ -36,7 +36,7 @@ def sendAlert():
         alert = request.args.get('alert')
         chatId = data[token]['chatId']
         data[token]['seen'] = False
-        bot.send_message(chatId, alert + '\n/seen')
+        bot.send_message(chatId, alert)
         return 'alert sent'
     except Exception as e:
         return str(e)
