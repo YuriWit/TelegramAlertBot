@@ -1,7 +1,7 @@
 from flask import Flask, request
-import telebot
+import telebot, os
 
-bot = telebot.TeleBot('5382490304:AAHAVgrcmrKFoSx2pNrjVpsAYF8aeQlz-Bc')
+bot = telebot.TeleBot(os.sys.argv[1])
 app = Flask(__name__)
 data = {}
 
