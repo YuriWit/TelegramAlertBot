@@ -1,50 +1,72 @@
 from flask import Flask, request
-import telebot, json
+import telebot
 
-bot = telebot.TeleBot("5382490304:AAHAVgrcmrKFoSx2pNrjVpsAYF8aeQlz-Bc")
+bot = telebot.TeleBot('5382490304:AAHAVgrcmrKFoSx2pNrjVpsAYF8aeQlz-Bc')
 app = Flask(__name__)
-seen = {}
+data = {}
 
 @app.route('/')
 def index():
     return 'Server on'
 
-@app.route('/alert/<chatid>', methods=['GET','POST'])
-def alert(chatid):
+@app.route('/newToken', methods=['GET'])
+def newToken():
     try:
-        seen[chatid] = False
-        if request.method == 'POST':
-            data = request.get_json()
-            json_data = json.loads(data)
-            alert = json_data["alert"]
-        elif request.method == 'GET':
-            alert = request.args.get('alert')
-        else:
-            raise Exception('Method not suported')
-        bot.send_message(chatid, alert + "\n/seen")
-        return "ok"
+        if 'token' not in request.args:
+            return 'missing token'
+        token = request.args.get('token')
+        if 'chatId' not in request.args:
+            return 'missing chatId'
+        chatId = request.args.get('chatId')
+        data[token] = {'chatId':chatId, 'seen':True}
+        return 'token active'
     except Exception as e:
-        print(e)
         return str(e)
 
-@app.route('/seen/<chatid>', methods=['GET','POST'])
-def chech(chatid):
+@app.route('/alert', methods=['GET'])
+def sendAlert():
     try:
-        if request.method == 'POST':
-            data = request.get_json()
-            json_data = json.loads(data)
-            chat_seen = json_data["seen"]
-            seen[chatid] = chat_seen
-            return "ok"
-        elif request.method == 'GET':
-            return str(seen[chatid])
-        else:
-            raise Exception('Method not suported')
+        if 'token' not in request.args:
+            return 'missing token'
+        token = request.args.get('token')
+        if token not in data:
+            return 'invalid token'
+        if 'alert' not in request.args:
+            return 'missing alert' 
+        alert = request.args.get('alert')
+        chatId = data[token]['chatId']
+        data[token]['seen'] = False
+        bot.send_message(chatId, alert + '\n/seen')
+        return 'alert sent'
     except Exception as e:
-        print(e)
+        return str(e)
+
+@app.route('/seen', methods=['GET'])
+def sendSeen():
+    try:
+        if 'token' not in request.args:
+            return 'missing token'
+        token = request.args.get('token')
+        if token not in data:
+            return 'invalid token'
+        return str(data[token]['seen'])
+    except Exception as e:
+        return str(e)
+
+@app.route('/setSeen', methods=['GET'])
+def setSeen():
+    try:
+        if 'token' not in request.args:
+            return 'error'
+        token = request.args.get('token')
+        if token not in data:
+            return 'error'
+        data[token]['seen'] = True
+        return 'seen set'
+    except Exception as e:
         return str(e)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
    app.run(host='0.0.0.0', port=80)
    
